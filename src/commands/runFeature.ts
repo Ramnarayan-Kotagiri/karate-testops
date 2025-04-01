@@ -87,7 +87,7 @@ export async function runFeatureCommand(
         return;
     }
 
-    const command = commandBuilder.buildRunCommand(featureUri.fsPath, activeEnv, undefined, workspaceFolder); // Undefined scenarioLine means run whole feature
+    const command = commandBuilder.buildRunCommand(featureUri.fsPath, activeEnv, undefined); // Undefined scenarioLine means run whole feature
 
     if (command) {
         const terminal = getKarateTerminal(outputChannel);

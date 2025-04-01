@@ -74,7 +74,7 @@ export async function runScenarioCommand(
     }
 
 
-    const command = commandBuilder.buildRunCommand(document.uri.fsPath, activeEnv, scenarioInfo.line, workspaceFolder);
+    const command = commandBuilder.buildRunCommand(document.uri.fsPath, activeEnv, scenarioInfo.line);
 
     if (command) {
         const terminal = getKarateTerminal(outputChannel);
