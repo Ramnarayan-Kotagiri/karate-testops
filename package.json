@@ -2,7 +2,7 @@
   "name": "karate-testops",
   "displayName": "Karate TestOps",
   "description": "Enhances Karate API testing in VS Code with environment management, context-menu execution, and scenario debugging.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "RamKotagiri",
   "license": "MIT",
   "repository": {
