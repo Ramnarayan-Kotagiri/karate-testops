@@ -6,7 +6,6 @@ import { EnvironmentViewProvider } from './providers/environmentViewProvider';
 import { EnvironmentCommands } from './commands/environmentCommands';
 import { runFeatureCommand } from './commands/runFeature';
 import { runScenarioCommand } from './commands/runScenario';
-import { debugScenarioCommand } from './commands/debugScenario';
 import * as Constants from './constants';
 
 let outputChannel: vscode.OutputChannel;
@@ -48,7 +47,6 @@ export function activate(context: vscode.ExtensionContext) {
         // Feature/Scenario commands
         vscode.commands.registerCommand(Constants.CMD_RUN_FEATURE, (uri) => runFeatureCommand(configService, commandBuilderService, featureParserService, outputChannel, uri)),
         vscode.commands.registerCommand(Constants.CMD_RUN_SCENARIO, () => runScenarioCommand(configService, commandBuilderService, featureParserService, outputChannel)),
-        vscode.commands.registerCommand(Constants.CMD_DEBUG_SCENARIO, () => debugScenarioCommand(configService, commandBuilderService, featureParserService, outputChannel))
     );
 
      // Refresh view on activation and when configuration changes (e.g., manually editing workspace state)

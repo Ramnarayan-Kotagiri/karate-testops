@@ -24,7 +24,7 @@
     "debug",
     "runner"
   ],
-  "icon": "media/icon.svg",
+  "icon": "media/icon.png",
   "activationEvents": [
     "onView:karateTestOpsEnvironments",
     "onLanguage:karate",
@@ -35,8 +35,7 @@
     "onCommand:karate-testops.deleteEnvironment",
     "onCommand:karate-testops.setActiveEnvironment",
     "onCommand:karate-testops.runFeature",
-    "onCommand:karate-testops.runScenario",
-    "onCommand:karate-testops.debugScenario"
+    "onCommand:karate-testops.runScenario"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -76,10 +75,6 @@
       {
         "command": "karate-testops.runScenario",
         "title": "Karate TestOps: Run Scenario"
-      },
-      {
-        "command": "karate-testops.debugScenario",
-        "title": "Karate TestOps: Debug Scenario"
       }
     ],
     "viewsContainers": {
@@ -87,7 +82,7 @@
         {
           "id": "karateTestOpsContainer",
           "title": "Karate TestOps",
-          "icon": "media/icon.svg"
+          "icon": "media/icon.png"
         }
       ]
     },
@@ -144,11 +139,6 @@
         },
         {
           "when": "resourceLangId == karate || resourceLangId == gherkin",
-          "command": "karate-testops.debugScenario",
-          "group": "karate@2"
-        },
-        {
-          "when": "resourceLangId == karate || resourceLangId == gherkin",
           "command": "karate-testops.runFeature",
           "group": "karate@3"
         }
@@ -156,7 +146,7 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run package",
+    "vscode:prepublish": "npm run compile",
     "compile": "webpack --mode production",
     "watch": "webpack --watch --mode development --stats errors-warnings",
     "package": "webpack --mode production && vsce package",
@@ -187,6 +177,6 @@
     "webpack-cli": "^5.0.2"
   },
   "dependencies": {
-    "karate-testops": "file:"
+    
   }
 }
