@@ -1,0 +1,31 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Run Extension",
+			"type": "extensionHost",
+			"request": "launch",
+			"args": [
+				"--extensionDevelopmentPath=${workspaceFolder}"
+			],
+			"outFiles": [
+				"${workspaceFolder}/dist/**/*.js" // Point to webpack output
+			],
+			"preLaunchTask": "npm: watch" // Run webpack watch before launching
+		},
+		{
+			"name": "Extension Tests",
+			"type": "extensionHost",
+			"request": "launch",
+			"args": [
+				"--extensionDevelopmentPath=${workspaceFolder}",
+				"--extensionTestsPath=${workspaceFolder}/out/test/suite/index" // Point to compiled test index
+			],
+			"outFiles": [
+				"${workspaceFolder}/out/test/**/*.js", // Point to compiled test files
+                "${workspaceFolder}/dist/**/*.js" // Also include extension code source maps
+			],
+			"preLaunchTask": "npm: test-compile" // Compile tests before running
+		}
+	]
+}

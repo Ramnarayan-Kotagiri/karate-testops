@@ -1,0 +1,192 @@
+{
+  "name": "karate-testops",
+  "displayName": "Karate TestOps",
+  "description": "Enhances Karate API testing in VS Code with environment management, context-menu execution, and scenario debugging.",
+  "version": "0.1.0",
+  "publisher": "RamKotagiri",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ramnarayan-Kotagiri/karate-testops.git"
+  },
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Testing"
+  ],
+  "keywords": [
+    "karate",
+    "api",
+    "testing",
+    "gherkin",
+    "bdd",
+    "debug",
+    "runner"
+  ],
+  "icon": "media/icon.svg",
+  "activationEvents": [
+    "onView:karateTestOpsEnvironments",
+    "onLanguage:karate",
+    "onLanguage:gherkin",
+    "onCommand:karate-testops.refreshEnvironments",
+    "onCommand:karate-testops.addEnvironment",
+    "onCommand:karate-testops.editEnvironment",
+    "onCommand:karate-testops.deleteEnvironment",
+    "onCommand:karate-testops.setActiveEnvironment",
+    "onCommand:karate-testops.runFeature",
+    "onCommand:karate-testops.runScenario",
+    "onCommand:karate-testops.debugScenario"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "karate-testops.refreshEnvironments",
+        "title": "Refresh Environments",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "karate-testops.addEnvironment",
+        "title": "Add Environment",
+        "icon": "$(add)"
+      },
+      {
+        "command": "karate-testops.editEnvironment",
+        "title": "Edit Environment",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "karate-testops.deleteEnvironment",
+        "title": "Delete Environment",
+        "icon": "$(trashcan)"
+      },
+      {
+        "command": "karate-testops.setActiveEnvironment",
+        "title": "Set as Active Environment"
+      },
+      {
+        "command": "karate-testops.unsetActiveEnvironment",
+        "title": "Unset Active Environment"
+      },
+      {
+        "command": "karate-testops.runFeature",
+        "title": "Karate TestOps: Run Feature"
+      },
+      {
+        "command": "karate-testops.runScenario",
+        "title": "Karate TestOps: Run Scenario"
+      },
+      {
+        "command": "karate-testops.debugScenario",
+        "title": "Karate TestOps: Debug Scenario"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "karateTestOpsContainer",
+          "title": "Karate TestOps",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "karateTestOpsContainer": [
+        {
+          "id": "karateTestOpsEnvironments",
+          "name": "Environments",
+          "icon": "$(list-flat)",
+          "contextualTitle": "Karate TestOps Environments"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "karate-testops.addEnvironment",
+          "when": "view == karateTestOpsEnvironments",
+          "group": "navigation@1"
+        },
+        {
+          "command": "karate-testops.refreshEnvironments",
+          "when": "view == karateTestOpsEnvironments",
+          "group": "navigation@2"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "karate-testops.setActiveEnvironment",
+          "when": "view == karateTestOpsEnvironments && viewItem == karateTestOpsEnvironment && !viewItem.isActive",
+          "group": "inline@1"
+        },
+        {
+          "command": "karate-testops.unsetActiveEnvironment",
+          "when": "view == karateTestOpsEnvironments && viewItem == karateTestOpsEnvironment && viewItem.isActive",
+          "group": "inline@1"
+        },
+        {
+          "command": "karate-testops.editEnvironment",
+          "when": "view == karateTestOpsEnvironments && viewItem == karateTestOpsEnvironment",
+          "group": "inline@2"
+        },
+        {
+          "command": "karate-testops.deleteEnvironment",
+          "when": "view == karateTestOpsEnvironments && viewItem == karateTestOpsEnvironment",
+          "group": "inline@3"
+        }
+      ],
+      "editor/context": [
+        {
+          "when": "resourceLangId == karate || resourceLangId == gherkin",
+          "command": "karate-testops.runScenario",
+          "group": "karate@1"
+        },
+        {
+          "when": "resourceLangId == karate || resourceLangId == gherkin",
+          "command": "karate-testops.debugScenario",
+          "group": "karate@2"
+        },
+        {
+          "when": "resourceLangId == karate || resourceLangId == gherkin",
+          "command": "karate-testops.runFeature",
+          "group": "karate@3"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack --mode production",
+    "watch": "webpack --watch --mode development --stats errors-warnings",
+    "package": "webpack --mode production && vsce package",
+    "lint": "eslint src --ext ts",
+    "test-compile": "tsc -p ./",
+    "test-watch": "tsc -watch -p ./",
+    "pretest": "npm run test-compile && npm run lint",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^18.x.x",
+    "@types/vscode": "^1.75.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "@vscode/test-electron": "^2.3.0",
+    "@vscode/vsce": "^2.19.0",
+    "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "prettier": "^2.8.8",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.4",
+    "webpack": "^5.81.0",
+    "webpack-cli": "^5.0.2"
+  },
+  "dependencies": {
+    "karate-testops": "file:"
+  }
+}
